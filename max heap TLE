@@ -1,0 +1,19 @@
+import heapq
+class Solution:
+    def minimizeArrayValue(self, nums: List[int]) -> int:
+        pmax=10**20
+        n=len(nums)
+        l=list(map(lambda x:-1*x,nums))
+        heapq.heapify(l)
+        while pmax>=l[0]*-1:
+            pmax=l[0]*-1
+            num=l[0]*-1
+            idx=nums.index(num)
+            if idx>0:
+                nums[idx]-=1
+                nums[idx-1]+=1
+                l=list(map(lambda x:-1*x,nums))
+                heapq.heapify(l)
+            else:
+                break
+        return l[0]*-1
